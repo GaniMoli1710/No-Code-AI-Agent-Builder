@@ -10,3 +10,6 @@ SQLAlchemy # For database ORM
 aiosqlite # Async driver for SQLite
 PyJWT # For JWT handling (if we do simple manual tokens)
 passlib[bcrypt] # For password hashing
+uvicorn # For serving the app
+fastapi # For building the API
+python-multipart # For file uploads
