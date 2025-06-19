@@ -2,7 +2,7 @@
 import streamlit as st
 import requests
 
-API_URL = "http://localhost:8000"
+API_URL = "https://no-code-ai-agent-builder.onrender.com"
 
 st.set_page_config(page_title="🤖 AI Agent Builder", page_icon="🤖", layout="wide")
 
@@ -216,7 +216,7 @@ def hosted_chat_page():
                 st.session_state[f"hosted_chat_history_{agent_id}"].append({"role": "assistant", "content": answer})
 
 # --- Page Routing ---
-query_params = st.experimental_get_query_params()
+query_params = st.query_params
 if query_params.get("page", [None])[0] == "hosted_chat":
     hosted_chat_page()
 else:
