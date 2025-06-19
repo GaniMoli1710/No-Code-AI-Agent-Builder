@@ -8,12 +8,12 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://nocodeaiagentbuilder_user:ed15vGoG7Cn0lEOSUgPbB0CqWVVGg8uw@dpg-d1a3fs3e5dus73e6t6s0-a/nocodeaiagentbuilder") 
-os.makedirs("/tmp", exist_ok=True)
-print(f"DEBUG: DATABASE_URL being used: {DATABASE_URL}") 
+CUSTOM_DATABASE_URL = os.getenv("CUSTOM_DATABASE_URL", "postgresql+asyncpg://nocodeaiagentbuilder_user:ed15vGoG7Cn0lEOSUgPbB0CqWVVGg8uw@dpg-d1a3fs3e5dus73e6t6s0-a/nocodeaiagentbuilder") 
+
+print(f"DEBUG: DATABASE_URL being used: {CUSTOM_DATABASE_URL}") 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-engine = create_async_engine(DATABASE_URL, echo=False) # echo=True for SQL logs
+engine = create_async_engine(CUSTOM_DATABASE_URL, echo=False) # echo=True for SQL logs
 Base = declarative_base()
 AsyncSessionLocal = sessionmaker(
     autocommit=False,
