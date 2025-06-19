@@ -2,18 +2,23 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy import Column, Integer, String, Text, DateTime, func, Boolean
 from passlib.context import CryptContext
-import os
-
-# Load environment variables (ensure this runs early or in app.py)
 from dotenv import load_dotenv
 load_dotenv()
 
-CUSTOM_DATABASE_URL = os.getenv("CUSTOM_DATABASE_URL", "postgresql+asyncpg://nocodeaiagentbuilder_user:ed15vGoG7Cn0lEOSUgPbB0CqWVVGg8uw@dpg-d1a3fs3e5dus73e6t6s0-a/nocodeaiagentbuilder") 
+import os
 
-print(f"DEBUG: DATABASE_URL being used: {CUSTOM_DATABASE_URL}") 
+raw_url = os.getenv("DATABASE_URL")
+if raw_url and raw_url.startswith("postgresql://"):
+    DATABASE_URL = raw_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+elif raw_url:
+    DATABASE_URL = raw_url
+else:
+    DATABASE_URL = "postgresql+asyncpg://nocodeaiagentbuilder_user:ed15vGoG7Cn0lEOSUgPbB0CqWVVGg8uw@dpg-d1a3fs3e5dus73e6t6s0-a/nocodeaiagentbuilder"
+
+print(f"DEBUG: DATABASE_URL being used: {DATABASE_URL}")
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-engine = create_async_engine(CUSTOM_DATABASE_URL, echo=False) # echo=True for SQL logs
+engine = create_async_engine(DATABASE_URL, echo=False) # echo=True for SQL logs
 Base = declarative_base()
 AsyncSessionLocal = sessionmaker(
     autocommit=False,
