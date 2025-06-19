@@ -42,7 +42,9 @@ class LLMAgentService:
         documents = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         chunks = text_splitter.split_documents(documents)
-
+        if not chunks:
+           raise ValueError("No content found in the uploaded file.")
+        
         # Delete existing vector store for this agent before creating a new one
         agent_chroma_path = self._get_agent_chroma_path(agent_id)
         if os.path.exists(agent_chroma_path):
@@ -64,7 +66,6 @@ class LLMAgentService:
             self.embeddings_model,
             persist_directory=agent_chroma_path
         )
-        vector_store.persist()
         vector_store = None
         gc.collect()
         return agent_chroma_path
