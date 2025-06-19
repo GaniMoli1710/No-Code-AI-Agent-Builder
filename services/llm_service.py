@@ -19,7 +19,7 @@ class LLMAgentService:
             raise ValueError("GEMINI_API_KEY is not set in environment variables.")
         self.embeddings_model = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004", google_api_key=api_key)
         self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.2, google_api_key=api_key)
-        self.base_vector_store_path = os.path.join("tmp", "chroma_db") # Base dir for all agent DBs
+        self.base_vector_store_path = os.path.join("/tmp", "chroma_db") # Base dir for all agent DBs
         os.makedirs(self.base_vector_store_path, exist_ok=True) # Ensure it exists
 
     def _get_agent_chroma_path(self, agent_id: int):
