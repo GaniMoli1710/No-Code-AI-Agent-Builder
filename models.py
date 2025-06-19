@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///tmp/app.db") 
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://nocodeaiagentbuilder_user:ed15vGoG7Cn0lEOSUgPbB0CqWVVGg8uw@dpg-d1a3fs3e5dus73e6t6s0-a/nocodeaiagentbuilder") 
 os.makedirs("/tmp", exist_ok=True)
 print(f"DEBUG: DATABASE_URL being used: {DATABASE_URL}") 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
