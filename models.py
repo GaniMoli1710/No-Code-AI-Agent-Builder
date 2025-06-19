@@ -7,8 +7,9 @@ import os
 # Load environment variables (ensure this runs early or in app.py)
 from dotenv import load_dotenv
 load_dotenv()
+os.makedirs("/tmp", exist_ok=True)
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./data/app.db") # Default to local file
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./tmp/app.db") # Default to local file
 print(f"DEBUG: DATABASE_URL being used: {DATABASE_URL}") 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
