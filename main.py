@@ -130,7 +130,7 @@ async def chat_with_agent(request: AgentRequest):
 
 @app.post("/upload_kb/")
 async def upload_kb(agent_id: int, file: UploadFile = File(...)):
-    upload_dir = "tmp/uploads"
+    upload_dir = "/tmp/uploads"
     os.makedirs(upload_dir, exist_ok=True)
     file_path = os.path.join(upload_dir, file.filename)
     with open(file_path, "wb") as f:
