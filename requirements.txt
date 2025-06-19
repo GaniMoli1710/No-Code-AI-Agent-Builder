@@ -16,3 +16,5 @@ passlib[bcrypt] # For password hashing
 uvicorn # For serving the app
 fastapi # For building the API
 python-multipart # For file uploads
+asyncpg
+psycopg2-binary
