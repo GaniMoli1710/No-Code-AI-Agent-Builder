@@ -3,6 +3,7 @@ python-dotenv
 google-generativeai
 langchain # For RAG
 langchain-google-genai # For Gemini embeddings & chat models
+langchain_chroma
 chromadb # For vector store (will use SQLite backend)
 pypdf # For PDF parsing
 python-docx # Optional, for Word docs
